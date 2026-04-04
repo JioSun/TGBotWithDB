@@ -2,8 +2,9 @@ from aiogram import Router
 from aiogram.types import Message
 from aiogram.filters import Command
 from Parser.parse_file import orchestrator
-from database.db_main import launch_init, launch_history
 from datetime import datetime
+from database.db_main import launch_init, launch_history
+
 router = Router()
 
 @router.message(Command("start"))
@@ -25,7 +26,7 @@ async def parse(message: Message) -> None:
 
 @router.message(Command("history"))
 async def history(message: Message) -> None:
-    lst = launch_history(message.from_user.id)[::-1][:5]
+    lst = launch_history(message.from_user.id)
     if len(lst) == 0:
         await message.answer('Вы ещё не делали запросов')
     else:
@@ -43,7 +44,5 @@ async def help(message: Message) -> None:
 @router.message()
 async def echo_handler(message: Message) -> None:
     await message.answer('Не понимаю команду. Используй /parse')
-
-
 
 
