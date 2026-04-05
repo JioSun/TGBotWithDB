@@ -15,3 +15,5 @@ async def history_list(user_id: int):
 @app.post('/history')
 async def history_init(user_id: int, username: str, launch_time: str):
     return launch_init(user_id, username, launch_time)
+
+pass
