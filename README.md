@@ -18,7 +18,7 @@ It is easy to use and has simple commands underneath.
 2. Установи зависимости: `pip install -r requirements.txt`
 3. Создай `.env` из `.env.example` и заполни переменные
 4. Запусти: `python main.py`
-5. 
+   
 ## Примеры работы бота
 + [Вывод пять первых карточек магазина с книгами](https://iimg.su/i/Khv0ei)
 + [Показ истории запуска пользователем](https://iimg.su/i/inuIO4)
