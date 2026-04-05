@@ -1,10 +1,10 @@
-import json
 import requests
 from bs4 import BeautifulSoup
+import json
 
-def get_page():
+def get_page(page_number):
     try:
-        response = requests.get('https://books.toscrape.com/')
+        response = requests.get(f'https://books.toscrape.com/catalogue/page-{page_number}.html')
         response.raise_for_status()
         return response.text
     except Exception:
@@ -21,10 +21,11 @@ def soup_page(page):
         lstEl.append({'title': title, 'price': price, 'rating': rating})
     if len(lstEl) == 0:
         return None
-    return lstEl[:5]
+    return json.dumps(lstEl, ensure_ascii=False)
 
-def orchestrator():
-    page = get_page()
+def orchestrator(page_number=1):
+    page = get_page(page_number)
     if page is None:
         return None
     return soup_page(page)
+
