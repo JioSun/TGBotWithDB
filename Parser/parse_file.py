@@ -1,6 +1,8 @@
+from api_directory.api_classes.api_cls import Book
+
 import requests
 from bs4 import BeautifulSoup
-import json
+
 
 def get_page(page_number):
     try:
@@ -18,14 +20,12 @@ def soup_page(page):
         title = element.h3.find('a').get('title')
         price = element.find('p', class_ = 'price_color').text
         rating = element.p.get('class')[1]
-        lstEl.append({'title': title, 'price': price, 'rating': rating})
+        lstEl.append(Book(title=title, price=price, rating=rating))
     if len(lstEl) == 0:
         return None
-    return json.dumps(lstEl, ensure_ascii=False)
+    return lstEl
 
 def orchestrator(page_number=1):
     page = get_page(page_number)
-    if page is None:
-        return None
     return soup_page(page)
 

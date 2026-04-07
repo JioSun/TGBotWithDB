@@ -1,9 +1,10 @@
-from aiogram import Router
-from aiogram.types import Message
-from aiogram.filters import Command
-from Parser.parse_file import orchestrator
 from datetime import datetime
-from database.db_main import launch_init, launch_history
+import json
+from aiogram import Router
+from aiogram.filters import Command
+from aiogram.types import Message
+
+import requests
 
 router = Router()
 
@@ -13,24 +14,31 @@ async def hello(message: Message) -> None:
 
 @router.message(Command("parse"))
 async def parse(message: Message) -> None:
-    products = orchestrator()
-    if products is None:
-        await message.answer('Список книг пуст. Не удалось обработать информацию')
-    else:
-        for i, product in enumerate(products):
-            await message.answer(f'Книга {i + 1}:\n'
-                                 f'\tНазвание: {product['title']}\n'
-                                 f'\tЦена: {product["price"]}\n'
-                                 f'\tРейтинг: {product["rating"]}\n')
-    launch_init(message.from_user.id, message.from_user.username, datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
+    try:
+        products = requests.get('http://127.0.0.1:8000/books')
+        products.raise_for_status()
+
+        if len(json.dumps(products.json())) == 0:
+            await message.answer('Список книг пуст')
+        else:
+            s = ''
+            for i, product in enumerate(products):
+                s += f'Книга {i + 1}:\n'\
+                                     f'\tНазвание: {product['title']}\n'\
+                                     f'\tЦена: {product['price']}\n'\
+                                     f'\tРейтинг: {product['rating']}\n\n'
+            await message.answer(s)
+    except Exception as e:
+
 
 @router.message(Command("history"))
 async def history(message: Message) -> None:
-    lst = launch_history(message.from_user.id)
+    try:
+        products = requests.get(f'http://127.0.0.1:8000/history/{message.}')
     if len(lst) == 0:
         await message.answer('Вы ещё не делали запросов')
     else:
-        history_stroke = [f'{i + 1}) {' '.join(el)}\n' for i, el in enumerate(lst)]
+        history_stroke = [f'{i + 1}) {' '.join([el.username, el.date])}\n' for i, el in enumerate(lst)]
         await message.answer(f'Ваши последнии запросы:\n{''.join(history_stroke)}')
 
 @router.message(Command('url'))

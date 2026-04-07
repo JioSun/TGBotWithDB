@@ -6,3 +6,6 @@ fastapi
 requests
 beautifulsoup4
 python-dotenv
+uvicorn
+httpx
+pydantic

@@ -1,15 +1,13 @@
-import asyncio
 import logging
 import sys
 from os import getenv
 from dotenv import load_dotenv
-
 from aiogram import Bot, Dispatcher
 from aiogram.client.default import DefaultBotProperties
 from aiogram.enums import ParseMode
-from handlers.routers import router
 from database.db_main import db_init
-
+from handlers.routers import router
+import asyncio
 # Bot token can be obtained via https://t.me/BotFather
 load_dotenv()
 TOKEN = getenv('BOT_TOKEN')

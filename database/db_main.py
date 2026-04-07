@@ -1,6 +1,7 @@
 import psycopg2
 from os import getenv
 from dotenv import load_dotenv
+from api_directory.api_classes.api_cls import History
 
 load_dotenv()
 DB_NAME = getenv("DB_NAME")
@@ -19,7 +20,7 @@ def db_init():
     cur.execute("""
                        CREATE TABLE IF NOT EXISTS launch_history
                        (
-                           user_id INT NOT NULL,
+                           user_id BIGINT NOT NULL,
                            username TEXT NOT NULL,
                            launch_time TEXT NOT NULL
                        )
@@ -41,7 +42,7 @@ def launch_init(user_id: int, username: str, launch_time: str) -> None:
     cursor.close()
     conn.close()
 
-def launch_history(user_id: int) -> list:
+def launch_history(user_id: int):
     conn = get_connection()
     cursor = conn.cursor()
     cursor.execute("""
@@ -51,4 +52,5 @@ def launch_history(user_id: int) -> list:
     result = cursor.fetchall()
     cursor.close()
     conn.close()
-    return result
+    return [History(username=el[0], date=el[1]) for el in result]
+
