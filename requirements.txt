@@ -1,7 +1,5 @@
 aiogram
 psycopg2-binary
-dotenv
-
 fastapi
 requests
 beautifulsoup4

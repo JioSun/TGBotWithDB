@@ -1,5 +1,5 @@
 from fastapi import FastAPI, HTTPException
-from Parser.parse_file import orchestrator
+from parser.parse_file import orchestrator
 from api_directory.api_classes.api_cls import BookList, Book, HistoryCreate, User, HistoryList
 from database.db_main import launch_history, launch_init
 
@@ -20,7 +20,7 @@ async def api_launch_history(user_id: int) -> HistoryList:
     result = HistoryList(history=launch_history(_obj.user_id))
     return result
 
-@app.post('/history', response_model=HistoryCreate)
+@app.post('/history')
 async def api_launch_init(history_init: HistoryCreate):
     launch_init(history_init.user_id, history_init.username, history_init.date)
     return {"success": True}

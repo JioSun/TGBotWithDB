@@ -18,7 +18,8 @@ def soup_page(page):
     lstEl = []
     for element in elements:
         title = element.h3.find('a').get('title')
-        price = element.find('p', class_ = 'price_color').text
+        price_text = element.find('p', class_ = 'price_color').get_text(strip=True)
+        price = price_text.replace('Â£', '').replace('£', '')
         rating = element.p.get('class')[1]
         lstEl.append(Book(title=title, price=price, rating=rating))
     if len(lstEl) == 0:
