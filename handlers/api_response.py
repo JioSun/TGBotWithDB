@@ -1,6 +1,6 @@
 import httpx
 
-BASE_URL = "https://fearless-enchantment-production-0db7.up.railway.app/"
+BASE_URL = "https://fearless-enchantment-production-0db7.up.railway.app"
 
 async def get_books():
     async with httpx.AsyncClient() as client:
