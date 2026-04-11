@@ -1,6 +1,6 @@
 import httpx
 
-BASE_URL = "http://127.0.0.1:8000"
+BASE_URL = "http://0.0.0.0:8000"
 
 async def get_books():
     async with httpx.AsyncClient() as client:
