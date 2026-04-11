@@ -4,67 +4,74 @@ This is a **Telegram Bot** written in the Python programming language, which sup
 
 It is easy to use and has simple commands underneath.
 
-## Как его найти?
-- Cсылка для работы с ботом: [t.me/parse14bot](https://t.me/parse14bot)
+## How to find it?
+- Link for working with Bot: [t.me/parse14bot](https://t.me/parse14bot)
 
-## Какие команды он имеет?
-- ```/parse``` - команда которая выводит пять сообщений с заголовком, ценой и рейтингом книги
-- ```/history``` - показывает историю запуска парсера пользователем 
-- ```/help``` - выводит список имеющихся команд
-- ```/url``` - возвращает ссылку на сайт с которого были взяты товары
-## Установка дополнительного ПО
+## Available commands
+- ```/parse``` - command that returns five product cards in a single message
+- ```/history``` - shows the user's command history 
+- ```/help``` - displays the list of available commands
+- ```/url``` - returns the link to the website from which the products were taken
+## Additional software installation
+### Git
+- [Git installation guide](https://youtu.be/xiPXztV8WUk?si=Wh9n4y1sA0pyv9mf)
 ### PostgreSQL
-- [Ссылка на гайд с полной установкой PostgreSQL](https://youtu.be/nxGhGQFk34Y?si=RHKnMYhpvTR8VZsm)
+- [Full PostgreSQL installation guide](https://youtu.be/nxGhGQFk34Y?si=RHKnMYhpvTR8VZsm)
 ### BotFather
-Здесь ничего устанавливать не нужно, от этого бота мы получаем только токен:<br>
-- [Переходим по ссылке на BotFather](https://telegram.me/s/BotFther)
-- Прописываем ```/newbot```
-- Даём название своему боту
-- Копируем токен
-## Установка бота
-1) Вам необходимо клонировать бота в любое место где вам удобно: <br>
+Nothing needs to be installed here, this bot is only used to obtain a token:<br>
+- [Open BotFather via the link](https://telegram.me/s/BotFther)
+- Enter ```/newbot```<br>
+![Enter /newbot](IFG/IFG6.png)
+- Set a name for your bot<br>
+![Enter /newbot](IFG/IFG7.png)
+- Copy the token<br>
+![Копируем](IFG/IFG8.png)
+## Bot installation
+1) Clone the bot to any convenient location: <br>
    - ```git
      git clone https://github.com/JioSun/TGBotWithDB.git
      ```
-2) Создаём и активируем виртуальное окружение
-   -  ```python
+     ![Cloning the repository to your device](IFG/IFG1.png)
+2) Create and activate a virtual environment
+   -  ```
       python -m venv venv
       ```
-   - ```bash
+      ![Creating a virtual environment](IFG/IFG2.png)
+   - ```
      path\to\venv\Scripts\activate
      ```
-3) В корне проекта открываем командную строку и прописываем в ней команду:<br>
-   - ```python
+     ![Activating a virtual environment](IFG/IFG3.png)
+3) In the project root, open a terminal and run:<br>
+   - ```
      pip install -r requirements.txt
      ```
-4) В корне проекта создаём файл ```.env```, копируем необходимые переменные из ```.env.exmaple``` и заполняем:
-   ```
-   BOT_TOKEN=токен бота, получаемый в BotFather
-   DB_HOST=имя хоста, на котором активирована база данных
-   DB_PORT=порт хоста
-   DB_NAME=название базы данных
-   DB_USER=имя пользователя базы данных
-   DB_PASSWORD=пароль от базы данных
-   ```
-5) Активируем API-приложение(создаём локальный хост):<br>
-   - ```python
+4) In the project root, create a file ```.env```, copy the required variables from ```.env.exmaple``` and fill them in:
+     ```
+     BOT_TOKEN=token received from BotFather
+     DB_HOST=database host
+     DB_PORT=host port
+     DB_NAME=database name
+     DB_USER=database username
+     DB_PASSWORD=database password
+     ```
+5) Start the API application (create a local server):<br>
+   - ```
      uvicorn api_directory.api_main:app --reload
      ```
-
-6) Запускаем нашего бота: <br>
-   - ```python
+     ![Running the API application](IFG/IFG4.png)
+6) Run the bot: <br>
+   - ```
      python main.py
      ```
-  
-## Примеры работы бота
-- [Вывод пять первых карточек магазина с книгами](https://s10.iimage.su/s/04/gKhv0eixVVk1dQiVMEvz59vX4jvzdWIZEP6gyURS6.png)
-- [Показ истории запуска пользователем](https://iimg.su/i/inuIO4)
-- [Вывод ссылки с магазином](https://iimg.su/i/ZpqWqu)
-- [Описание изображения](https://site/foto)
+     ![Running the bot](IFG/IFG5.png)
+## Examples of bot usage
+### Example of /parse command
+![Example of /parse command](IFG/IFG9.png)
+### Example of /history command
+![Example of /history command](IFG/IFG10.png)
+### Example of /url command
+![Example of /url command](IFG/IFG11.png)
+### Example of /help command
+![Example of /help command](IFG/IFG12.png)
 
-## Какие библиотеки использовались для разработки?
-[BeautifulSoup4](https://beautiful-soup-4.readthedocs.io/en/latest/)
-[aiogram](https://docs.aiogram.dev/en/latest/)
-[psycopg2](https://www.psycopg.org/docs/)
-[dotenv](https://www.dotenv.org/docs/)
 
