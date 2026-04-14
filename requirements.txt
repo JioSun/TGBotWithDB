@@ -1,0 +1,4 @@
+click
+psycopg
+asyncio
+dotenv
